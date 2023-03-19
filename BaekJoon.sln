@@ -37,6 +37,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CHESS1018", "CHESS1018\CHES
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SUGAR2839", "SUGAR2839\SUGAR2839.vcxproj", "{5C0ACEA7-1633-4224-8F5E-7FDCEA84277A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PRIME1929", "PRIME1929\PRIME1929.vcxproj", "{6BF9FBAF-108E-432A-A08D-7EBDD7EA65E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -181,6 +183,14 @@ Global
 		{5C0ACEA7-1633-4224-8F5E-7FDCEA84277A}.Release|x64.Build.0 = Release|x64
 		{5C0ACEA7-1633-4224-8F5E-7FDCEA84277A}.Release|x86.ActiveCfg = Release|Win32
 		{5C0ACEA7-1633-4224-8F5E-7FDCEA84277A}.Release|x86.Build.0 = Release|Win32
+		{6BF9FBAF-108E-432A-A08D-7EBDD7EA65E1}.Debug|x64.ActiveCfg = Debug|x64
+		{6BF9FBAF-108E-432A-A08D-7EBDD7EA65E1}.Debug|x64.Build.0 = Debug|x64
+		{6BF9FBAF-108E-432A-A08D-7EBDD7EA65E1}.Debug|x86.ActiveCfg = Debug|Win32
+		{6BF9FBAF-108E-432A-A08D-7EBDD7EA65E1}.Debug|x86.Build.0 = Debug|Win32
+		{6BF9FBAF-108E-432A-A08D-7EBDD7EA65E1}.Release|x64.ActiveCfg = Release|x64
+		{6BF9FBAF-108E-432A-A08D-7EBDD7EA65E1}.Release|x64.Build.0 = Release|x64
+		{6BF9FBAF-108E-432A-A08D-7EBDD7EA65E1}.Release|x86.ActiveCfg = Release|Win32
+		{6BF9FBAF-108E-432A-A08D-7EBDD7EA65E1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
