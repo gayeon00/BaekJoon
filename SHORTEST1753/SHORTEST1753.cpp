@@ -1,67 +1,67 @@
-﻿// SHORTEST1753.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include <queue>
 
 using namespace std;
-typedef pair<int, int> pii;
+
+int V, E, K;
+typedef pair<int, int> node;
+
+static vector<vector<node>> mlist;
+static vector<int> mdistance;
+static vector<bool> visited;
+static priority_queue<node, vector<node>, greater<node>> q;
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    int V, E, K;
-    cin >> V >> E >> K;
-
-    vector<vector<pii>> A(V+1);
-    vector<bool> visited(V+1, false);
-
-    //인접리스트 입력받기
-    for (int i = 0; i < E; i++) {
-        int u, v, w;
-        cin >> u >> v >> w;
-        A[u].push_back({ v,w });
-    }
-
-    //최단거리 배열 초기화
-    vector<int> result(V + 1, 3000000);
-    result[K] = 0;
-    //큐
-    priority_queue<pii, vector<pii>, greater<pii>> myQueue;
-    myQueue.push({0,K});
-
-    while (!myQueue.empty()) {
-        //최단거리 노드 선택
-        pii now = myQueue.top();
-        myQueue.pop();
-        int now_v = now.second;
-        //방문한 적 있는지 확인
-        if (visited[now_v]) {
-            continue;
-        }
-
-        //방문했다고 업데이트
-        visited[now_v] = true;
-
-        for (int i = 0; i < A[now_v].size(); i++) {
-            pii tmp = A[now_v][i];
-            int next = tmp.first;
-            int value = tmp.second;
-
-            if (result[next] > result[now_v] + value) {
-                result[next] = result[now_v] + value;
-                myQueue.push({ result[next], next });
-            }
-        }
-    }
-
-    for (int i = 1; i <= V; i++) {
-        if (visited[i]) cout << result[i] << '\n';
-        else cout << "INF" << '\n';
-    }
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
 
+
+	cin >> V >> E >> K;
+
+	mlist.resize(V + 1);
+	mdistance.resize(V + 1);
+	fill(mdistance.begin(), mdistance.end(), 3000000);
+	visited.resize(V + 1);
+	fill(visited.begin(), visited.end(), false);
+
+
+	for (int i = 0; i < E; i++) {
+		int u, v, w;
+		cin >> u >> v >> w;
+		mlist[u].push_back(make_pair(v, w));
+	}
+
+	q.push(make_pair(0, K));
+	mdistance[K] = 0;
+
+	while (!q.empty()) {
+		node now = q.top();
+		q.pop();
+		int n_v = now.second;
+		int n_w = now.first;
+		if (visited[n_v]) continue;
+		visited[n_v] = true;
+
+		for (int i = 0; i < mlist[n_v].size(); i++) {
+			node tmp = mlist[n_v][i];
+			int next = tmp.first;
+			int value = tmp.second;
+
+			if (!visited[next] && (mdistance[n_v]+value < mdistance[next])) {
+				mdistance[next] = mdistance[n_v] + value;
+				q.push(make_pair(mdistance[next], next));
+			}
+		}
+	}
+
+	for (int i = 1; i <= V; i++) {
+		if (visited[i]) {
+			cout << mdistance[i] << '\n';
+		} else {
+			cout << "INF" << '\n';
+		}
+	}
 }
