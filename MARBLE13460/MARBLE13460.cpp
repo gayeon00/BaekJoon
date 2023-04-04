@@ -3,7 +3,7 @@
 
 using namespace std;
 
-static char Map[11][11];
+static char board[11][11];
 static bool visited[11][11][11][11];
 static int N, M;
 static int dx[] = { 1,-1,0,0 };
@@ -16,7 +16,7 @@ struct step {
 };
 
 void move(int& rx, int& ry, int& rc, int& i) {
-	while (Map[rx+dx[i]][ry+dy[i]]!='#' && Map[rx][ry]!='O') {
+	while (board[rx+dx[i]][ry+dy[i]]!='#' && board[rx][ry]!='O') {
 		rx += dx[i];
 		ry += dy[i];
 		rc++;
@@ -47,8 +47,8 @@ void BFS(int Rx, int Ry, int Bx, int By) {
 			move(nrx, nry, rc, i);
 			move(nbx, nby, bc, i);
 
-			if (Map[nbx][nby] == 'O') continue;
-			if (Map[nrx][nry] == 'O') {
+			if (board[nbx][nby] == 'O') continue;
+			if (board[nrx][nry] == 'O') {
 				cout << ncount;
 				return;
 			}
@@ -78,11 +78,11 @@ int main() {
 	//입력 받기
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
-			cin >> Map[i][j];
-			if (Map[i][j] == 'R') {
+			cin >> board[i][j];
+			if (board[i][j] == 'R') {
 				Rx = i; Ry = j;
 			}
-			if (Map[i][j] == 'B') {
+			if (board[i][j] == 'B') {
 				Bx = i; By = j;
 			}
 		}
