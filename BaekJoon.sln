@@ -87,6 +87,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SNAKE3190", "SNAKE3190\SNAK
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SUPA13458", "SUPA13458\SUPA13458.vcxproj", "{C4F324FC-E0B4-417A-9680-34E935FFFB98}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QUIT14501", "QUIT14501\QUIT14501.vcxproj", "{6C6956BF-4615-4BE4-90DB-55623517BD63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -431,6 +433,14 @@ Global
 		{C4F324FC-E0B4-417A-9680-34E935FFFB98}.Release|x64.Build.0 = Release|x64
 		{C4F324FC-E0B4-417A-9680-34E935FFFB98}.Release|x86.ActiveCfg = Release|Win32
 		{C4F324FC-E0B4-417A-9680-34E935FFFB98}.Release|x86.Build.0 = Release|Win32
+		{6C6956BF-4615-4BE4-90DB-55623517BD63}.Debug|x64.ActiveCfg = Debug|x64
+		{6C6956BF-4615-4BE4-90DB-55623517BD63}.Debug|x64.Build.0 = Debug|x64
+		{6C6956BF-4615-4BE4-90DB-55623517BD63}.Debug|x86.ActiveCfg = Debug|Win32
+		{6C6956BF-4615-4BE4-90DB-55623517BD63}.Debug|x86.Build.0 = Debug|Win32
+		{6C6956BF-4615-4BE4-90DB-55623517BD63}.Release|x64.ActiveCfg = Release|x64
+		{6C6956BF-4615-4BE4-90DB-55623517BD63}.Release|x64.Build.0 = Release|x64
+		{6C6956BF-4615-4BE4-90DB-55623517BD63}.Release|x86.ActiveCfg = Release|Win32
+		{6C6956BF-4615-4BE4-90DB-55623517BD63}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
