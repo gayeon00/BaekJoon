@@ -95,6 +95,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "start14889", "start14889\st
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BABYSHARK16236", "BABYSHARK16236\BABYSHARK16236.vcxproj", "{85F106AA-05EF-4F80-9790-6413FA130DAA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ROBOT14503", "ROBOT14503\ROBOT14503.vcxproj", "{78020D1C-893A-48C4-8D3C-9D2752782B57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -471,6 +473,14 @@ Global
 		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Release|x64.Build.0 = Release|x64
 		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Release|x86.ActiveCfg = Release|Win32
 		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Release|x86.Build.0 = Release|Win32
+		{78020D1C-893A-48C4-8D3C-9D2752782B57}.Debug|x64.ActiveCfg = Debug|x64
+		{78020D1C-893A-48C4-8D3C-9D2752782B57}.Debug|x64.Build.0 = Debug|x64
+		{78020D1C-893A-48C4-8D3C-9D2752782B57}.Debug|x86.ActiveCfg = Debug|Win32
+		{78020D1C-893A-48C4-8D3C-9D2752782B57}.Debug|x86.Build.0 = Debug|Win32
+		{78020D1C-893A-48C4-8D3C-9D2752782B57}.Release|x64.ActiveCfg = Release|x64
+		{78020D1C-893A-48C4-8D3C-9D2752782B57}.Release|x64.Build.0 = Release|x64
+		{78020D1C-893A-48C4-8D3C-9D2752782B57}.Release|x86.ActiveCfg = Release|Win32
+		{78020D1C-893A-48C4-8D3C-9D2752782B57}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
