@@ -93,6 +93,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DELI14888", "DELI14888\DELI
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "start14889", "start14889\start14889.vcxproj", "{108ACF03-B372-4EBD-96CA-E42DE3BA7CF2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BABYSHARK16236", "BABYSHARK16236\BABYSHARK16236.vcxproj", "{85F106AA-05EF-4F80-9790-6413FA130DAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -461,6 +463,14 @@ Global
 		{108ACF03-B372-4EBD-96CA-E42DE3BA7CF2}.Release|x64.Build.0 = Release|x64
 		{108ACF03-B372-4EBD-96CA-E42DE3BA7CF2}.Release|x86.ActiveCfg = Release|Win32
 		{108ACF03-B372-4EBD-96CA-E42DE3BA7CF2}.Release|x86.Build.0 = Release|Win32
+		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Debug|x64.ActiveCfg = Debug|x64
+		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Debug|x64.Build.0 = Debug|x64
+		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Debug|x86.ActiveCfg = Debug|Win32
+		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Debug|x86.Build.0 = Debug|Win32
+		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Release|x64.ActiveCfg = Release|x64
+		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Release|x64.Build.0 = Release|x64
+		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Release|x86.ActiveCfg = Release|Win32
+		{85F106AA-05EF-4F80-9790-6413FA130DAA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
