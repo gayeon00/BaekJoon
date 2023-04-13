@@ -1,38 +1,39 @@
-﻿// NQUEEN9663.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
+﻿#include <iostream>
 
 using namespace std;
+
 int N, cnt = 0;
 int arr[15];
 
-bool isPossible(int col) {
-	for (int i = 0; i < col; i++) {
-		if ( arr[i] == arr[col] || (col - i) == abs(arr[col] - arr[i])) {
+bool isPossible(int column) {
+	for (int i = 0; i < N; i++) {
+		//동일한 행에 놓은 열이 있는지, 대각선 상에 놓은 열이 있는지 검사
+		if (arr[column] == arr[i] || abs(column - arr[column]) == abs(i - arr[i])) {
 			return false;
 		}
 	}
-	return true;
 }
 
-void nQueen(int depth) {
-	if (depth == N) {
+void DFS(int column) {
+	if (column == N) {
 		cnt++;
 		return;
 	}
-
 	for (int i = 0; i < N; i++) {
-		arr[depth] = i;
-		if (isPossible(depth)) {
-			nQueen(depth + 1);
-		}
+		arr[column] = i;
+		//i행에 놓았을 때, 그 열은 가능한가!
+		if(isPossible(column)) DFS(column + 1);
+		//안되면 그냥 넘어가서 다음 행 탐색하는 거지
 	}
+
 }
 
 
 int main() {
 	cin >> N;
-	nQueen(0);
+
+	DFS(0);
 	cout << cnt << '\n';
+
+	
 }
