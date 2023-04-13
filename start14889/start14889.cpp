@@ -4,7 +4,7 @@
 using namespace std;
 
 int S[21][21];
-bool check[22];
+bool visited[22];
 int N;
 int myMin = 1000000000;
 
@@ -16,8 +16,8 @@ void DFS(int x, int index) // x는 카운트 수, pos는 다음 값
 		int start = 0, link = 0;
 		for (int i = 1; i <= N; i++) {
 			for (int j = 1; j <= N; j++) {
-				if (check[i] && check[j]) start += S[i][j];
-				if (!check[i] && !check[j]) link += S[i][j];
+				if (visited[i] && visited[j]) start += S[i][j];
+				if (!visited[i] && !visited[j]) link += S[i][j];
 			}
 		}
 		int tmp = abs(start - link);
@@ -25,9 +25,9 @@ void DFS(int x, int index) // x는 카운트 수, pos는 다음 값
 	}
 
 	for (int i = x; i <= N; i++) {
-		check[i] = true;
+		visited[i] = true;
 		DFS(i + 1, index + 1);
-		check[i] = false;
+		visited[i] = false;
 	}
 
 }
