@@ -1,39 +1,35 @@
 ﻿#include <iostream>
 #include <deque>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
-typedef pair<int, int> Node;
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-
+	/*
+	슬라이딩 윈도우!
+	덱에 {인덱스, 숫자}로 집어 넣기
+	덱에 넣을 때, 들어가는 숫자랑 맨 뒤에 있는 숫자 비교해서
+	맨 뒤에 있는 숫자가 더크다면 빼주기
+	=> 오름차순 정렬가능! => 최솟값 구하는 거니까 나중에 그냥 맨 앞값 가져오면 됨!
+	그리고 맨 뒤에 인덱스 - 맨 앞 인덱스 < L이어야함! (윈도우 크기 때문)
+	*/
 	int N, L;
 	cin >> N >> L;
 
-	deque<Node> myDeque = {};
-
+	deque<pair<int,int>> dq;
 	for (int i = 1; i <= N; i++) {
-		int k;
-		//숫자 입력 받기
-		cin >> k;
-
-		//덱이 비지 않고, 덱 마지막 숫자가 들어올 숫자보다 크면
-		while (myDeque.size() && myDeque.back().second > k) {
-			//덱 마지막 pop하기
-			myDeque.pop_back();
+		int tmp;
+		cin >> tmp;
+		while (dq.size() && dq.back().second > tmp) {
+			dq.pop_back();
+		}
+		dq.push_back({ i,tmp });
+		if (dq.back().first - dq.front().first >= L) {
+			dq.pop_front();
 		}
 
-		//덱에 node(인덱스, 들어올 숫자) push하기
-		myDeque.push_back(Node(i, k));
-		//간격이 슬라이딩 윈도우보다 크면
-		if (myDeque.back().first - myDeque.front().first >= L) {
-			//맨 앞 pop하기
-			myDeque.pop_front();
-		}
-
-		//결과적으로 맨 앞값이 최솟값이라 맨앞 출력하기
-		cout << myDeque.front().second << ' ';
+		cout << dq.front().second << " ";
 	}
+	
 }
