@@ -2,76 +2,59 @@
 #include <vector>
 
 using namespace std;
+
 int board[9][9];
+vector<pair<int,int>> blanks;
 
 void read_data() {
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {
 			cin >> board[i][j];
+			if (board[i][j] == 0) blanks.push_back({ i,j });
 		}
 	}
 }
-//비어있는 i,j위치에 들어올 수 있는 숫자 구하기
-vector<int> getPossibleNums(int x, int y) {
-	//같은 열 탐색
-	bool numbers[10] = { false };
-	for (int j = 0; j < 9; j++) {
-		if (board[x][j] == 0) continue;
-		numbers[board[x][j]] = true;
-	}
 
-	//같은 행 탐색
+bool check(int row, int col) {
 	for (int i = 0; i < 9; i++) {
-		if (board[i][y] == 0) continue;
-		numbers[board[i][y]] = true;
+		if (board[row][i] == board[row][col] && i != col) return false;
+		if (board[i][col] == board[row][col] && i != row) return false;
 	}
 
-	//박스 탐색
-	int boxX = (x / 3) * 3;
-	int boxY = (y / 3) * 3;
+	int boxX = (row / 3) * 3;
+	int boxY = (col / 3) * 3;
 	for (int i = 0; i < 3; i++) {
 		for (int j = 0; j < 3; j++) {
-			if (board[boxX + i][boxY + j] == 0) continue;
-			numbers[board[boxX + i][boxY + j]] = true;
+			if (boxX + i == row && boxY + j == col) continue;
+			if (board[boxX + i][boxY + j] == board[row][col]) return false;
 		}
 	}
 
-
-	vector<int> possibleNumbs;
-	for (int i = 1; i <= 9; i++) {
-		if (numbers[i] == false) {
-			possibleNumbs.push_back(i);
-		}
-	}
-
-	return possibleNumbs;
+	return true;
 }
 
+bool finish = false;
 
-bool solve(int x, int y) {
-
-	if (x == 9) return true;
-
-	if (board[x][y] != 0) {
-		if (y == 8) {
-			if (solve(x + 1, 0)) return true;
-		} else {
-			if (solve(x, y + 1)) return true;
-		}
-		return false;
+void solve(int count) {
+	if (count == blanks.size()) {
+		finish = true;
+		return;
 	}
 
-	vector<int> possibleNums = getPossibleNums(x, y);
-	for (auto i : possibleNums) {
-		board[x][y] = i;
-		if (y == 8) {
-			if (solve(x + 1, 0)) return true;
-		} else {
-			if (solve(x, y + 1)) return true;
+	int row = blanks[count].first;
+	int col = blanks[count].second;
+
+	for (int i = 1; i <= 9; i++) {
+		board[row][col] = i;
+		if (check(row, col)) {
+			solve(count + 1);
 		}
-		board[x][y] = 0;
+
+		if (finish) return;
 	}
-	return false;
+
+	board[row][col] = 0;
+	return;
 }
 
 void print_data() {
@@ -82,8 +65,13 @@ void print_data() {
 		cout << '\n';
 	}
 }
+
 int main() {
 	read_data();
-	solve(0,0);
+	//빈칸들 목록을 만들고, 첫 빈칸부터 시작
+	//빈칸에 1~9까지 숫자를 일단 넣어봐
+	//그리고 그게 규칙에 맞으면 다음 빈칸을 탐색 DFS
+	//빈칸 목록 끝에 도달하면 탐색 끝!!
+	solve(0);
 	print_data();
 }
