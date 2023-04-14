@@ -1,49 +1,51 @@
 ﻿#include <iostream>
-#include <vector>
 #include <algorithm>
 
 using namespace std;
 
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-
-	int N, count = 0;
-	vector<int> A;
-
-	cin >> N;
-	//일단 숫자 배열 입력 받기
-	for (int i = 0; i < N; i++) {
-		int tmp;
-		cin >> tmp;
-		A.push_back(tmp);
+	/*
+	수를 배열로 나타내고,
+	맨 앞을 가리키는 포인터1, 타겟 숫자를 가리키는 포인터2
+	while(포인터1이 포인터2보다 앞에 있을 동안){
+		if(포인터1+포인터2가 타겟이면) {
+			count++;
+			while문 나가기!
+		}
 	}
+	*/
+	int N;
+	cin >> N;
 
-	//숫자 배열 정렬하기
-	sort(A.begin(), A.end());
-
-	//k마다 좋은 수 찾기
+	int numbers[2000];
 	for (int i = 0; i < N; i++) {
-		int start = 0; int end = N - 1;
-		while (start < end) {
-			if (A[start] + A[end] == A[i]) {
-				if (start != i && end != i) {
-					count++;
+		cin >> numbers[i];
+	}
+	
+	sort(numbers, numbers+N);
+
+	int cnt = 0;
+	for (int i = 0; i < N; i++) {
+		int a = 0, b = N - 1;
+		while (a < b) {
+			if (numbers[a] + numbers[b] == numbers[i]) {
+				if (a != i && b != i) {
+					cnt++;
 					break;
-				} else if (start == i) {
-					start++;
-				} else if (end == i) {
-					end--;
+				} else if (a == i) {
+					a++;
+				} else if (b == i) {
+					b--;
 				}
-			} else if (A[start] + A[end] > A[i]) {
-				end--;
+			} else if (numbers[a] + numbers[b] > numbers[i]) {
+				b--;
 			} else {
-				start++;
+				a++;
 			}
 		}
 	}
 
-	cout << count << '\n';
-	return 0;
+	cout << cnt;
+
+
 }
