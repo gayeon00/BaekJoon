@@ -22,11 +22,12 @@ void DFS(int x, int index) // x는 카운트 수, pos는 다음 값
 		}
 		int tmp = abs(start - link);
 		if (tmp < myMin) myMin = tmp;
+		return;
 	}
 
 	for (int i = x; i <= N; i++) {
-		visited[i] = true;
-		DFS(i + 1, index + 1);
+		visited[i] = true;   //x 방문처리
+		DFS(i + 1, index + 1); //x+1 탐색하기
 		visited[i] = false;
 	}
 
