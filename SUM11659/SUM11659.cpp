@@ -1,11 +1,8 @@
 ﻿#include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
-	/*
-	i번째 부터 j번째 수까지 합 구하기
-	gugan(i,j) = until(j)-sum(i-1)
-	*/
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
@@ -13,16 +10,17 @@ int main() {
 	int N, M;
 	cin >> N >> M;
 
-	int until[100001] = {};
+	//구간합 배열 S
+	vector<int> S(N + 1, 0);
 	for (int i = 1; i <= N; i++) {
 		int tmp;
 		cin >> tmp;
-		until[i] = until[i - 1] + tmp;
+		S[i] = S[i - 1] + tmp;
 	}
 
-	for (int i = 0; i < M; i++) {
-		int x, y;
-		cin >> x >> y;
-		cout << until[y] - until[x-1] << '\n';
+	for (int k = 0; k < M; k++) {
+		int i, j;
+		cin >> i >> j;
+		cout << S[j] - S[i - 1] << '\n';
 	}
 }
