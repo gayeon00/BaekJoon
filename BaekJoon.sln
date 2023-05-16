@@ -127,6 +127,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SUM11720", "SUM11720\SUM117
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AVG1546", "AVG1546\AVG1546.vcxproj", "{A4EA350A-6739-4E21-BDF4-7022FCD8047E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GUGAN11660", "GUGAN11660\GUGAN11660.vcxproj", "{28AA8767-C6AE-4721-BAD7-0E4DF1320E8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -631,6 +633,14 @@ Global
 		{A4EA350A-6739-4E21-BDF4-7022FCD8047E}.Release|x64.Build.0 = Release|x64
 		{A4EA350A-6739-4E21-BDF4-7022FCD8047E}.Release|x86.ActiveCfg = Release|Win32
 		{A4EA350A-6739-4E21-BDF4-7022FCD8047E}.Release|x86.Build.0 = Release|Win32
+		{28AA8767-C6AE-4721-BAD7-0E4DF1320E8E}.Debug|x64.ActiveCfg = Debug|x64
+		{28AA8767-C6AE-4721-BAD7-0E4DF1320E8E}.Debug|x64.Build.0 = Debug|x64
+		{28AA8767-C6AE-4721-BAD7-0E4DF1320E8E}.Debug|x86.ActiveCfg = Debug|Win32
+		{28AA8767-C6AE-4721-BAD7-0E4DF1320E8E}.Debug|x86.Build.0 = Debug|Win32
+		{28AA8767-C6AE-4721-BAD7-0E4DF1320E8E}.Release|x64.ActiveCfg = Release|x64
+		{28AA8767-C6AE-4721-BAD7-0E4DF1320E8E}.Release|x64.Build.0 = Release|x64
+		{28AA8767-C6AE-4721-BAD7-0E4DF1320E8E}.Release|x86.ActiveCfg = Release|Win32
+		{28AA8767-C6AE-4721-BAD7-0E4DF1320E8E}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
