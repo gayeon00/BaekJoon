@@ -1,5 +1,4 @@
 ﻿#include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
@@ -7,11 +6,13 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
+	int S[100001];
+
 	int N, M;
 	cin >> N >> M;
 
-	//구간합 배열 S
-	vector<int> S(N + 1, 0);
+	S[0] = 0;
+	/*S[i,j] = S[i] - S[j-1]*/
 	for (int i = 1; i <= N; i++) {
 		int tmp;
 		cin >> tmp;
