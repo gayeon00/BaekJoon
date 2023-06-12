@@ -1,26 +1,31 @@
 ﻿#include <iostream>
+#include <vector>
 using namespace std;
 
 int main() {
-	int start_index = 1, end_index = 1;
-	int sum = 1, count = 1;
 	int N;
-
 	cin >> N;
 
-	while (end_index != N) {
-		if (sum == N) {
-			count++;
-			end_index++;
-			sum += end_index;
-		} else if (sum < N) {
-			end_index++;
-			sum += end_index;
+	//N그자체 포함
+	int result = 1;
+
+	int i = 1, j = 1;
+	int sum = 1;
+	while (j != N) {
+		if (sum < N) {
+			j++;
+			sum += j;
+		} else if (sum > N) {
+			sum -= i;
+			i++;
 		} else {
-			sum -= start_index;
-			start_index++;
+			j++;
+			sum += j;
+			result++;
 		}
 	}
 
-	cout << count;
+	cout << result;
+
+
 }
