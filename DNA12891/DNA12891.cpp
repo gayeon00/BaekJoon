@@ -1,83 +1,31 @@
 ﻿#include <iostream>
+#include <string>
 using namespace std;
 
-int checkArr[4];
-int myArr[4];
-int checkSecret = 0;
-void Add(char c);
-void Remove(char c);
-
-int main() {
-	int S, P;
-	cin >> S >> P;
-
-	int result = 0;
-
-	string A;
-	cin >> A;
-
-	for (int i = 0; i < 4; i++) {
-		cin >> checkArr[i];
-		if (checkArr[i] == 0) {
-			checkSecret++;
-		}
-	}
-
-	//초기상태. 문자열 0번째부터 P번째까지 알파벳 카운트를 더해줌
-	for (int i = 0; i < P; i++) {
-		Add(A[i]);
-	}
-
-	//초기상태가 조건을 만족하면 result++
-	if (checkSecret == 4) {
-		result++;
-	}
-
-	//슬라이딩 윈도우 처리
-	//초기상태가 P-1번째까지 처리돼있으니까 P번째로 늘어나기
-	for (int i = P; i < S; i++) {
-		//앞 인덱스는 {마지막인덱스 - 길이} 해줌됨
-		int j = i - P;
-		//뒤 인덱스는 알파벳 카운트 더해주고
-		Add(A[i]);
-		//앞 인덱스는 알파벳 카운트 빼줌
-		Remove(A[j]);
-
-
-		//한번 하고 조건 만족하면 result++;
-		if (checkSecret == 4) {
-			result++;
-		}
-	}
-
-	cout << result;
-}
+//A,C,G,T 필요 수
+int require[4];
+//돌아보면서 A, C,G,T 각각 갯수가 만족하는지 체크
+int check[4];
+//필요수 == 체크 인 알파벳
+int satisfy_count = 0;
 
 void Add(char c) {
 	switch (c) {
 	case 'A':
-		myArr[0]++;
-		if (myArr[0] == checkArr[0]) {
-			checkSecret++;
-		}
+		check[0]++;
+		if (check[0] == require[0]) satisfy_count++;
 		break;
-	case 'C':
-		myArr[1]++;
-		if (myArr[1] == checkArr[1]) {
-			checkSecret++;
-		}
+	case'C':
+		check[1]++;
+		if (check[1] == require[1]) satisfy_count++;
 		break;
-	case 'G':
-		myArr[2]++;
-		if (myArr[2] == checkArr[2]) {
-			checkSecret++;
-		}
+	case'G':
+		check[2]++;
+		if (check[2] == require[2]) satisfy_count++;
 		break;
-	case 'T':
-		myArr[3]++;
-		if (myArr[3] == checkArr[3]) {
-			checkSecret++;
-		}
+	case'T':
+		check[3]++;
+		if (check[3] == require[3]) satisfy_count++;
 		break;
 	default:
 		break;
@@ -87,33 +35,57 @@ void Add(char c) {
 void Remove(char c) {
 	switch (c) {
 	case 'A':
-		//빠질 놈이 조건을 만족하고 있었다면 갯수--
-		if (myArr[0] == checkArr[0]) {
-			checkSecret--;
-		}
-		//빼주기
-		myArr[0]--;
+		if (check[0] == require[0]) satisfy_count--;
+		check[0]--;
 		break;
-	case 'C':
-		if (myArr[1] == checkArr[1]) {
-			checkSecret--;
-		}
-		myArr[1]--;
+	case'C':
+		if (check[1] == require[1]) satisfy_count--;
+		check[1]--;
 		break;
-	case 'G':
-		if (myArr[2] == checkArr[2]) {
-			checkSecret--;
-		}
-		myArr[2]--;
+	case'G':
+		if (check[2] == require[2]) satisfy_count--;
+		check[2]--;
 		break;
-	case 'T':
-		
-		if (myArr[3] == checkArr[3]) {
-			checkSecret--;
-		}
-		myArr[3]--;
+	case'T':
+		if (check[3] == require[3]) satisfy_count--;
+		check[3]--;
 		break;
 	default:
 		break;
 	}
+}
+int main() {
+	int S, P;
+	cin >> S >> P;
+
+	string str;
+	cin >> str;
+
+	int result = 0;
+
+	for (int i = 0; i < 4; i++) {
+		cin >> require[i];
+		if (require[i] == 0) satisfy_count++;
+	}
+
+
+	
+	//str의 맨앞 P개 A,C,G,T갯수 체크
+	for (int i = 0; i < P; i++) {
+		Add(str[i]);
+	}
+
+	if (satisfy_count == 4) {
+		result++;
+	}
+
+	for (int j = P; j < S; j++) {
+		int i = j - P;
+		Add(str[j]);
+		Remove(str[i]);
+
+		if (satisfy_count == 4) result++;
+	}
+
+	cout << result;
 }
