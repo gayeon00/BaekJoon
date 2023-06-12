@@ -1,38 +1,48 @@
-﻿// REMAIN10986.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
+﻿#include <iostream>
+#include <vector>
 using namespace std;
 
-long long S[1000001] = { 0 };
-long long C[1000001] = { 0 };
+//구간합 배열
+vector<long> S;
 
-int main()
-{
-	long long N, M;
+//구간합 % M 배열
+vector<long> remain;
+
+//0~M-1나머지애 대해 갯수
+vector<long> C;
+
+long cnt = 0;
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int N, M;
 	cin >> N >> M;
 
-	long long cnt = 0;
-	long long remain[1000] = { 0 };
+	S.resize(N + 1, 0);
+	remain.resize(N + 1, 0);
+	C.resize(M, 0);
 
 	for (int i = 1; i <= N; i++) {
-		long long tmp;
+		int tmp;
 		cin >> tmp;
-		//구간합 배열
 		S[i] = S[i - 1] + tmp;
 
-		//M으로 나눈 나머지를 담은 배열
-		C[i] = S[i] % M;
-		//해당 나머지가 0이라면 바로 cnt증가
-		if (C[i] == 0) cnt++;
-		//암튼 0~M-1에 대한 나머지에 대해 몇개씩 나오는지 세기
-		remain[C[i]]++;
-	}
+		remain[i] = S[i] % M;
 
+		if (remain[i] == 0) cnt++;
+
+		C[remain[i]]++;
+	}
+	
 	for (int i = 0; i < M; i++) {
-		//같은 나머지를 가지는 숫자들 중 2개 조합
-		cnt += remain[i] * (remain[i] - 1) / 2;
+		cnt += C[i] * (C[i] - 1) / 2;
 	}
 
 	cout << cnt;
+
+
+
+
 }
