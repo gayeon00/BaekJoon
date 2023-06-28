@@ -29,5 +29,27 @@ int main()
 
     cout << result;
 
+    for (int i = 1; i < N; i++) {
+        int insert_point = i;
+        int insert_value = A[i];
+        for (int j = i - 1; j >= 0; j--) {
+            if (A[j] < A[i]) {
+                insert_point = j + 1;
+                break;
+            }
+            if (j == 0) {
+                insert_point = 0;
+            }
+        }
+
+        //shift하기
+        for (int j = i; j > insert_point; j--) {
+            A[j] = A[j - 1];
+        }
+
+        //집어넣기
+        A[insert_point] = insert_value;
+    }
+
 
 }
