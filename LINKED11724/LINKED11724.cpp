@@ -2,51 +2,41 @@
 #include <vector>
 using namespace std;
 
-vector<vector<int>> A;
-
+int result = 0;
+vector<vector<int>> linked;
 vector<bool> visited;
 
-void DFS(int v) {
-	if (visited[v]) {
-		return;
-	}
+void DFS(int i) {
+	visited[i] = true;
 
-	visited[v] = true;
-
-	//시작점에 딸린 놈들에 대해서 탐색 안한 놈이라면 탐색~~
-	for (int i : A[v]) {
-		if (!visited[i]) {
-			DFS(i);
-		}
+	for (auto j : linked[i]) {
+		if(!visited[j]) DFS(j);
 	}
 }
+
 
 int main() {
 	int N, M;
 	cin >> N >> M;
 
-	A.resize(N + 1);
-	visited.resize(N + 1, false);
+	linked.resize(N + 1);
+	visited.resize(N + 1);
 
-	for (int i = 1; i <= N; i++) {
-		int u,v;
+	for (int i = 0; i < M; i++) {
+		int u, v;
 		cin >> u >> v;
 
-		A[u].push_back(v);
-		A[v].push_back(u);
+		//연결 리스트에 넣기
+		linked[u].push_back(v);
+		linked[v].push_back(u);
 	}
 
-	int count = 0;
-
 	for (int i = 1; i <= N; i++) {
-		//시작점이 될 수 있다면 ++ => 새로운 묶음이 되는 거니까!
 		if (!visited[i]) {
-			count++;
-			//시작점에 대해서 탐색
+			result++;
 			DFS(i);
 		}
 	}
-
-	cout << count;
-
+	cout << result;
 }
+
