@@ -169,6 +169,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TREE1167", "TREE1167\TREE11
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GUITAR2343", "GUITAR2343\GUITAR2343.vcxproj", "{A5560085-58B0-42B1-A423-080644587150}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KTH1300", "KTH1300\KTH1300.vcxproj", "{DD8F2FDB-DF0C-4B0C-A434-53A447841AE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -841,6 +843,14 @@ Global
 		{A5560085-58B0-42B1-A423-080644587150}.Release|x64.Build.0 = Release|x64
 		{A5560085-58B0-42B1-A423-080644587150}.Release|x86.ActiveCfg = Release|Win32
 		{A5560085-58B0-42B1-A423-080644587150}.Release|x86.Build.0 = Release|Win32
+		{DD8F2FDB-DF0C-4B0C-A434-53A447841AE2}.Debug|x64.ActiveCfg = Debug|x64
+		{DD8F2FDB-DF0C-4B0C-A434-53A447841AE2}.Debug|x64.Build.0 = Debug|x64
+		{DD8F2FDB-DF0C-4B0C-A434-53A447841AE2}.Debug|x86.ActiveCfg = Debug|Win32
+		{DD8F2FDB-DF0C-4B0C-A434-53A447841AE2}.Debug|x86.Build.0 = Debug|Win32
+		{DD8F2FDB-DF0C-4B0C-A434-53A447841AE2}.Release|x64.ActiveCfg = Release|x64
+		{DD8F2FDB-DF0C-4B0C-A434-53A447841AE2}.Release|x64.Build.0 = Release|x64
+		{DD8F2FDB-DF0C-4B0C-A434-53A447841AE2}.Release|x86.ActiveCfg = Release|Win32
+		{DD8F2FDB-DF0C-4B0C-A434-53A447841AE2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
