@@ -6,28 +6,25 @@ using namespace std;
 int N, L;
 deque<pair<int, int>> q;
 int main() {
-	ios::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-
 	cin >> N >> L;
-
-	int tmp;
-	for (int i = 1; i <= N; i++) {
+	for (int i = 0; i < N; i++) {
+		int tmp;
 		cin >> tmp;
-
-		if (q.size() == 0) {
-			q.push_back({i,tmp});
-		} else {
-			if (i - q.front().first >= L) {
-				q.pop_front();
-			}
-			while (q.size() != 0 && q.back().second > tmp) {
-				q.pop_back();
-			}
-			q.push_back({ i,tmp });
+		
+		//값이 들어올 때마다 덱에서 들어오는 값보다 큰 수를 뺌
+		while (!q.empty() && q.back().first > tmp) {
+			q.pop_back();
 		}
 
-		cout << q.front().second << " ";
+		q.push_back({ tmp, i });
+
+		//범위에서 벗어난 노드는 제거
+		if (q.front().second <= i - L) {
+			q.pop_front();
+		}
+
+		cout << q.front().first << " ";
 	}
+
+
 }

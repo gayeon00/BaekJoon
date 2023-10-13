@@ -1,23 +1,33 @@
 ﻿#include <iostream>
 #include <vector>
 #include <string>
+#include <sstream>
 using namespace std;
 
 vector<int> N;
 vector<char> C;
 
-vector<string> splice(string str, char chracter) {
+vector<string> splice(string str, char delimiter) {
 	vector<string> result;
-	string tmp;
-	for (int i = 0; i < str.size(); i++) {
-		if (str[i] == '-') {
-			result.push_back(tmp);
-			tmp.clear();
-		} else {
-			tmp.push_back(str[i]);
-		}
+	//string tmp;
+	//for (int i = 0; i < str.size(); i++) {
+	//	if (str[i] == '-') {
+	//		result.push_back(tmp);
+	//		tmp.clear();
+	//	} else {
+	//		tmp.push_back(str[i]);
+	//	}
+	//}
+	//result.push_back(tmp);
+
+	//string을 stream으로 만들어서
+	stringstream mystream(str);
+	string splitdata;
+
+	while (getline(mystream, splitdata, delimiter)) {
+		result.push_back(splitdata);
 	}
-	result.push_back(tmp);
+
 
 	return result;
 }
