@@ -1,0 +1,6 @@
+select B.USER_ID, B.NICKNAME, sum(A.price) as TOTAL_SALES
+from USED_GOODS_BOARD A join USED_GOODS_USER B on B.USER_ID = A.WRITER_ID
+where A.status = 'DONE'
+group by B.USER_ID, B.NICKNAME
+having TOTAL_SALES>=700000
+order by TOTAL_SALES
