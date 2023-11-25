@@ -3,7 +3,7 @@
 #define MX 999999999
 using namespace std;
 
-vector<vector<int>> dp(201, vector<int>(201,MX));
+vector<vector<int>> dp(1000, vector<int>(1000,MX));
 
 int solution(int alp, int cop, vector<vector<int>> problems) {
     int answer = 0, alp_mx = 0, cop_mx = 0;
