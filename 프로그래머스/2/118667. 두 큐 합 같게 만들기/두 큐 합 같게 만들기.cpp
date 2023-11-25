@@ -30,7 +30,7 @@ int solution(vector<int> queue1, vector<int> queue2) {
     if((total1+total2)%2==1) return -1;
     
     while(true) {
-        if(answer >= 4*(q1.size()+q2.size())) {
+        if(answer >= 2*(q1.size()+q2.size())) {
             answer = -1;
             break;
         }
