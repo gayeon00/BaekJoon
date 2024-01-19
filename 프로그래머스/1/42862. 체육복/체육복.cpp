@@ -1,36 +1,37 @@
 #include <string>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
 int solution(int n, vector<int> lost, vector<int> reserve) {
+    int answer = 0;
     
-    for(int i = 0; i < lost.size(); i++) {
-        for(int j = 0; j < reserve.size(); j++) {
-            if(lost[i] == reserve[j]) { //lost이자 reserve이면 둘 다로부터 제거하기
-                lost.erase(lost.begin()+i);
-                reserve.erase(reserve.begin()+j);
-                i = -1;
-                break;
+    vector<int> students(n+1, 1);
+    for(auto i: lost) {
+        students[i]--;
+    }
+    
+    for(auto i: reserve) {
+        students[i]++;
+    }
+    
+    for(int i = 1; i <= n; i++) {
+        if(students[i]==0) {
+            if(students[i-1] ==2) {
+                students[i-1]--;
+                students[i]++;
+            } else if(students[i+1]==2) {
+                students[i+1]--;
+                students[i]++;
             }
         }
     }
-    
-    int answer = n - lost.size();
-    sort(lost.begin(), lost.end());
-    sort(reserve.begin(), reserve.end());
-    for(int i = 0; i < lost.size(); i++) {
-        for(int j = 0; j < reserve.size(); j++) {
-            if(lost[i]-1 == reserve[j] || lost[i]+1 == reserve[j]) {
-                answer++;
-                reserve.erase(reserve.begin()+j);
-                break;
-            }
+
+    for(int i = 1; i <= n; i++) {
+        if(students[i]!=0) {
+            answer++;
         }
     }
-    
-    
     
     return answer;
 }
