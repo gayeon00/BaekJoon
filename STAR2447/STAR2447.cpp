@@ -1,16 +1,20 @@
 ﻿#include <iostream>
+#include <math.h>
 
 using namespace std;
-char board[7000][7000];
 
-void star(int x, int y, int N) {
-	if (N == 1) board[x][y] = '*';
-	else {
-		for (int i = x; i < x + N; i += N / 3) {
-			for (int j = y; j < y + N; j += N / 3) {
-				if (i == x + N / 3 && j == y + N / 3) continue;
-				
-				star(i, j, N / 3);
+char map[10000][10000];
+
+void draw(int x, int y, int k) {
+	if (k == 0) {
+		map[x][y] = '*';
+		return;
+	}
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			if (i != 1 || j != 1) {
+				draw(x + i * pow(3, k - 1), y + j * pow(3, k - 1), k - 1);
 			}
 		}
 	}
@@ -19,16 +23,25 @@ void star(int x, int y, int N) {
 int main() {
 	int N;
 	cin >> N;
-	for (int i = 0; i < 7000; i++) {
-		for (int j = 0; j < 7000; j++) {
-			board[i][j] = ' ';
+
+	for (int i = 0; i <= N; i++) {
+		for (int j = 0; j <= N; j++) {
+			map[i][j] = ' ';
 		}
 	}
-	star(0,0,N);
 
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			cout << board[i][j];
+	int tmp = N;
+	int count = 0;
+	while (tmp != 0) {
+		tmp /= 3;
+		count++;
+	}
+
+	draw(1, 1, count - 1);
+
+	for (int i = 1; i <= N; i++) {
+		for (int j = 1; j <= N; j++) {
+			cout << map[i][j];
 		}
 		cout << '\n';
 	}

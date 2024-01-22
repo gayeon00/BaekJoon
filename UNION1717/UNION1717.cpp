@@ -1,17 +1,18 @@
 ﻿#include <iostream>
-#include <vector>
 
 using namespace std;
 
-vector<int> parents;
+int parents[1000001];
 
 int find(int a) {
-	if (parents[a] == a) return a;
+	if (parents[a] == a) {
+		return a;
+	}
 
 	return parents[a] = find(parents[a]);
 }
 
-void unionfunc(int a, int b) {
+void u(int a, int b) {
 	a = find(a);
 	b = find(b);
 
@@ -24,33 +25,32 @@ void checkSame(int a, int b) {
 	a = find(a);
 	b = find(b);
 
-	if (a == b) {
-		cout << "YES" << '\n';
+	if (a != b) {
+		cout << "NO" << '\n'; 
 	} else {
-		cout << "NO" << '\n';
+		cout << "YES" << '\n';
 	}
 }
 
 int main() {
-	ios::sync_with_stdio;
+	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
 
 	int n, m;
 	cin >> n >> m;
 
-	parents.resize(n + 1);
-
-	//대표노드 자기 자신으로 초기화
 	for (int i = 0; i <= n; i++) {
 		parents[i] = i;
 	}
 
 	for (int i = 0; i < m; i++) {
-		int flag, a, b;
-		cin >> flag >> a >> b;
-
-		if (flag) checkSame(a, b);
-		else	  unionfunc(a, b);
+		int op, a, b;
+		cin >> op >> a >> b;
+		if (op == 0) {
+			u(a, b);
+		} else {
+			checkSame(a, b);
+		}
 	}
 }

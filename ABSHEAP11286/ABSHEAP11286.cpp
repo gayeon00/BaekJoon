@@ -1,40 +1,45 @@
-﻿// ABSHEAP11286.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
-
-#include <iostream>
+﻿#include <iostream>
 #include <queue>
-#include <algorithm>
+#include <stdlib.h>
+
 using namespace std;
 
 struct compare {
-    bool operator()(int& a, int& b) {
-        if (abs(a) == abs(b)) {
-            return a > b;
-        }
-        return abs(a) > abs(b);
-    }
+	bool operator()(int& l, int& r) {
+		if (abs(l) == abs(r)) {
+			return l > r;
+		}
+		return abs(l) > abs(r);
+	}
 };
 
 int main() {
-    int N;
-    cin >> N;
 
-    priority_queue<int, vector<int>, compare> pq;
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
 
-    for (int i = 0; i < N; i++) {
-        int tmp;
-        cin >> tmp;
+	int N;
+	cin >> N;
 
-        if (tmp == 0) {
-            if (pq.empty()) {
-                cout << 0 << '\n';
-            } else {
-                cout << pq.top() << '\n';
-                pq.pop();
-            }
-        } else {
-            //queue에 tmp넣기
-            pq.push(tmp);
-        }
-    }
+	priority_queue<int, vector<int>, compare> pq;
+	for (int i = 0; i < N; i++) {
+		int op;
+		cin >> op;
+		if (op==0) {
+			//배열에서 절댓값이 가장 작은 값 출력하고 그 값 pop;
+			if (pq.empty()) {
+				cout << "0" << '\n';
+			} else {
+				cout << pq.top() << '\n';
+				pq.pop();
+			}
+			
+		} else {
+			//배열에 넣기
+			pq.push(op);
+		}
+	}
+
+	return 0;
 }
