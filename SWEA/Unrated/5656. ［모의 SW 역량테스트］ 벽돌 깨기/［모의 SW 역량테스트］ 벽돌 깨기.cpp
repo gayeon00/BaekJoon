@@ -1,96 +1,130 @@
 #include <iostream>
-#include <queue>
-#include <stack>
 #include <algorithm>
-#include <climits>
+#include <queue>
+#include <tuple>
+#include <vector>
+#include <limits.h>
+
 using namespace std;
 
-class info {
-public:
-	int x, y, num;
-	info(int x, int y, int num) {
-		this->x = x;
-		this->y = y;
-		this->num = num;
-	}
-};
-
-int N, W, H, tot, res;
-int dx[4] = { -1,1,0,0 }, dy[4] = { 0,0,-1,1 };
-
-
-void countBricks(int newArr[][12]) {
-	int cnt = 0;
-	for (int m = 0; m < H; m++) for (int k = 0; k < W; k++) if (newArr[m][k] > 0) cnt++; // 남은 벽돌 개수 세기
-	res = min(res, cnt);
-}
-
-void gravity(int newArr[][12]) { // 남은 벽돌들 재정렬
-	stack<int> brick; // 재정렬 위해 벽돌 종류 저장
-	for (int j = 0; j < W; j++) {
-		for (int i = 0; i < H; i++) if (newArr[i][j] > 0) brick.push(newArr[i][j]);
-		for (int i = H - 1; i >= 0; i--) {
-			if (!brick.empty()) {
-				newArr[i][j] = brick.top(); // 밑에서부터 벽돌 채워 넣음
-				brick.pop();
-			} else newArr[i][j] = 0; // 나머지는 0으로 채워 넣음
-		}
-	}
-}
-
-void crash(int x, int y, int num, int newArr[][12]) {
-	newArr[x][y] = 0; // Mark the brick as destroyed
-
-	for (int dir = 0; dir < 4; ++dir) { // Explore all 4 directions
-		int nx = x, ny = y;
-
-		for (int step = 1; step < num; step++) { // Move 'power - 1' steps in each direction
-			nx += dx[dir];
-			ny += dy[dir];
-
-			if (nx >= 0 && nx < H && ny >= 0 && ny < W && newArr[nx][ny] > 0) {
-				crash(nx, ny, newArr[nx][ny], newArr); // Recursive call if another brick is found
+int N, W, H;
+int Answer;
+int dh[4] = { 1,0,-1,0 };
+int dw[4] = { 0,-1,0,1 };
+int countBlocks(int Map[15][12]) {
+	int count = 0;
+	for (int h = 0; h < H; h++) {
+		for (int w = 0; w < W; w++) {
+			if (Map[h][w] != 0) {
+				count++;
 			}
 		}
 	}
+
+	return count;
 }
 
-void dfs(int arr[][12], int n) { // 맨 위의 벽돌 찾기 - dfs
+void crash(int h, int w, int Map[15][12]) {
+	queue<tuple<int, int, int>> q;
+	q.push(make_tuple(h, w, Map[h][w]));
+	Map[h][w] = 0;
+	
+	while (!q.empty()) {
+		tuple<int, int, int> now = q.front();
+		q.pop();
+
+		int now_h = get<0>(now);
+		int now_w = get<1>(now);
+		int now_num = get<2>(now);
+
+		for (int i = 0; i < 4; i++) {
+			for (int j = 1; j < now_num; j++) {
+				int next_h = now_h + j * dh[i];
+				int next_w = now_w + j * dw[i];
+
+				if (next_h >= 0 && next_h < H && next_w >= 0 && next_w < W&& Map[next_h][next_w] != 0) {
+					q.push(make_tuple(next_h, next_w, Map[next_h][next_w]));
+					Map[next_h][next_w] = 0;
+				}
+				
+			}
+		}
+
+	}
+
+}
+
+void gravity(int Map[15][12]) {
+	for (int w = 0; w < W; w++) {
+
+		vector<int> tmp;
+
+		for (int h = 0; h < H; h++) {
+			if (Map[h][w] != 0) {
+				tmp.push_back(Map[h][w]);
+				Map[h][w] = 0;
+			}
+		}
+
+		int tmpSize = tmp.size();
+		for (int i = 0; i < tmpSize; i++) {
+			Map[H-1-i][w] = tmp.back();
+			tmp.pop_back();
+		}
+	}
+}
+
+void dfs(int n, int Map[15][12]) {
 	if (n == N) {
-		countBricks(arr);
+		Answer = min(Answer, countBlocks(Map));
 		return;
 	}
-	for (int j = 0; j < W; j++) { // 각 열마다 맨 위의 벽돌 찾기
-		int i = -1;
-		while (true) if (++i == H || arr[i][j] > 0) break; // 범위를 벗어나거나 벽돌이면 나온다
-		if (i == H) continue; // 벽돌이 없으면 다음 열로 이동
 
-		int newArr[15][12] = { 0 };
-		copy(&arr[0][0], &arr[0][0] + 15 * 12, &newArr[0][0]); // 이차원 배열 복사 후 사용
-		crash(i, j, newArr[i][j], newArr);
-		gravity(newArr);
-		dfs(newArr, n + 1);
+	for (int w = 0; w < W; w++) {
+		//tmpMap으로 작업하기
+		int tmpMap[15][12];
+		copy(&Map[0][0], &Map[0][0] + 15 * 12, &tmpMap[0][0]);
+
+		//h위치 구하기
+		int h = 0;
+		for (; h < H; h++) {
+			if (Map[h][w] != 0) {
+				break;
+			}
+		}
+		//w번째 세로 줄에 벽돌이 하나도 없어서 아무것도 못 깨는 경우를 제외하고
+		if (h != H) {
+			//h,w 부수기
+			crash(h, w, tmpMap);
+			gravity(tmpMap);
+			dfs(n + 1, tmpMap);
+		} else {
+			Answer = min(Answer, countBlocks(Map));
+		}
 	}
-	countBricks(arr); // 재귀로 못 넘어가는 경우도 있기 때문에 여기서도 res 갱신 시켜준다.
 }
 
 int main() {
+	int test_case;
 	int T;
+
 	cin >> T;
-	for (int t = 1; t <= T; t++) {
+	
+	for (test_case = 1; test_case <= T; test_case++) {
+		
 		cin >> N >> W >> H;
 
-		int arr[15][12] = { 0 };
-		for (int i = 0; i < H; i++) {
-			for (int j = 0; j < W; j++) {
-				cin >> arr[i][j];
+		Answer = INT_MAX;
+
+		int Map[15][12];
+		for (int h = 0; h < H; h++) {
+			for (int w = 0; w < W; w++) {
+				cin >> Map[h][w];
 			}
 		}
 
-		res = 987654321;
-		dfs(arr, 0);
-		cout << "#" << t << " " << res << "\n";
+		dfs(0, Map);
+		cout << "#" << test_case << " " << Answer << '\n';
 	}
-
 	return 0;
 }
